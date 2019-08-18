@@ -24,6 +24,7 @@ enamldef Main(Window):
                             spc,
                             grp_output
                         )]
+        padding = 30
         GroupBox: grp_inputs:
             title = 'Select league code and match day'
             constraints << [hbox(form_league_code, spacer, form_match_day)]

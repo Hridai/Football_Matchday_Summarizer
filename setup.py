@@ -10,7 +10,7 @@ setup(
                       'pyqt5',
                       ],
     packages=find_packages(),
-    package_data={'football_matchday_summarizer': ['*.enaml']},
+    package_data={'football_matchday_summarizer': ['*.enaml', '*.png']},
     entry_points={'console_scripts': [
         'run-app = football_matchday_summarizer.app:main',
     ]}
