@@ -1,13 +1,13 @@
 import enaml
+
 from enaml.qt.qt_application import QtApplication
 
 
 def main():
-    import pdb; pdb.set_trace()
     with enaml.imports():
-        from . import view
+        from football_matchday_summarizer import Main
     app = QtApplication()
-    view = view.Main()
+    view = Main()
     view.show()
     app.start()
 
