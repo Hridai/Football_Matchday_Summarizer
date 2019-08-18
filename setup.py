@@ -11,6 +11,6 @@ setup(
                       ],
     packages=find_packages(),
     entry_points={'console_scripts': [
-        'app_run = football_matchday_summarizer.app:main',
+        'app_run = app:main',
     ]}
 )
