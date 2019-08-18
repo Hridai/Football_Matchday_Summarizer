@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='FootballMatchdaySummarizer',
+    name='somethingrandom',
     version='1.0.0',
     description='Summarizes Football Match Days',
     install_requires=['enaml',
