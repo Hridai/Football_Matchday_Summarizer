@@ -4,7 +4,7 @@ from enaml.qt.qt_application import QtApplication
 
 def main():
     with enaml.imports():
-        from view import Main
+        from football_matchday_summarizer.view import Main
     app = QtApplication()
     view = Main()
     view.show()

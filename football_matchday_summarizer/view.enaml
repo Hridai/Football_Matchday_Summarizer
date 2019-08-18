@@ -2,12 +2,11 @@ from enaml.widgets.api import *
 from enaml.layout.api import *
 from enaml.stdlib.fields import IntField
 from enaml.core.api import Include
-from controller import MatchDaySummaryController
+from football_matchday_summarizer.controller import MatchDaySummaryController
 
 
 enamldef Main(Window):
     title = 'Football Matchday Summarizer'
-#    maximized
     attr controller = MatchDaySummaryController()
     Container:
         constraints << [vbox(
