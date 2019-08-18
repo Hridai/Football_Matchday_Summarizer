@@ -1,10 +1,17 @@
 # Football_Matchday_Summarizer
-Pulls scores, scorers and tables (live and past results) via an API. GUI built using TKINTER
+This is a modified version of the app originally built by @Hridai.
+Pulls scores, scorers and tables (live and past results) via an API. GUI built using ENAML
 
 # Why
 To get familiar with basic UI programming in Python and resolving JSON outputs and outputting it in a useful way
 Also because I want to check football scores, results, tables by just clicking buttons and not dong numerous google searches. If I want to check the big 4 league results/scorers/standings, I would have to do at least 4 google searches and click into every game to see the scorers individually. Then click again to see the standings.
 This displays all the pertinent information from the matchday for the league in question in one easy click.
+
+# Installation
+To install on an environment you can simply execute the following
+`pip install git+https://github.com/PyJay/Football_Matchday_Summarizer`
+
+Once installed you can run the app using the run-app.exe script in the environment
 
 # NOTE
 The free license to this API only allows 10 calls a minute. Each of the below, per league count as one call:
