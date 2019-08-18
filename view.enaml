@@ -7,22 +7,45 @@ from controller import MatchDaySummaryController
 
 enamldef Main(Window):
     title = 'Football Matchday Summarizer'
+#    maximized
     attr controller = MatchDaySummaryController()
     Container:
-        constraints << [vbox(container_inputs, spc, container_result)]
+        constraints << [vbox(
+                            container_inputs,
+                            spc,
+                            container_result
+                        )]
         Container: container_inputs:
             constraints << [hbox(form_league_code, form_match_day)]
             Form: form_league_code:
-                Label:
+                constraints << [lbl_league.right == combo_league.left - 10]
+                Label: lbl_league:
                     text = 'League Code'
-                ObjectCombo:
+                ObjectCombo: combo_league:
                     items = ['PL', 'PD', 'BL1', 'SA', '']
                     selected := controller.league_code
-            Form: form_match_day:
-                Label:
+            Container: form_match_day:
+                constraints << [hbox(lbl_match_day, int_match_day, btn_prev_day, btn_next_day, spacer),
+                                lbl_match_day.top == int_match_day.top,
+                                btn_next_day.width == 25,
+                                btn_prev_day.width == 25,
+                                align('v_center', lbl_match_day, int_match_day, btn_prev_day, btn_next_day)
+                                ]
+                Label: lbl_match_day:
                     text = 'Match Day'
-                IntField:
+                IntField: int_match_day:
+                    read_only = True
                     value := controller.match_day
+                    minimum = 0
+                PushButton: btn_next_day:
+                    text = '+'
+                    clicked::
+                        controller.increment_match_day()
+                PushButton: btn_prev_day:
+                    text = '-'
+                    clicked::
+                        controller.decrement_match_day()
+
         Separator: spc:
             pass
         Container: container_result:
@@ -31,16 +54,16 @@ enamldef Main(Window):
                 Label:
                     text = "Home Team"
                 Include:
-                    objects << [Field(text=team) for team in controller.home_teams]
+                    objects << [Label(text=team) for team in controller.home_teams]
             Container: scores:
                 Label:
                     text = ""
                 Include:
-                    objects << [Field(text=score) for score in controller.scores]
+                    objects << [Label(text=score) for score in controller.scores]
             Container: away_teams:
                 Label:
                     text = "Away Team"
                 Include:
-                        objects << [Field(text=team) for team in controller.away_teams]
+                    objects << [Label(text=team) for team in controller.away_teams]
 
 
