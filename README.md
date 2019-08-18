@@ -1,5 +1,5 @@
 # Football_Matchday_Summarizer
-Pulls scores, scorers and tables (live and past results) via an API. GUI built using TKINTER
+Pulls scores, scorers and tables (live and past results) via an API. GUI built using TKINTER (being replaced with an enaml interface)
 
 # Why
 To get familiar with basic UI programming in Python and resolving JSON outputs and outputting it in a useful way
