@@ -6,6 +6,8 @@ setup(
     description='Summarizes Football Match Days',
     install_requires=['enaml',
                       'atom',
+                      'qtpy',
+                      'pyqt'
                       ],
     packages=find_packages(),
     entry_points={'console_scripts': [
