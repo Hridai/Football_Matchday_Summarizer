@@ -1,3 +1,5 @@
+import enaml
+import os
 from enaml.widgets.api import *
 from enaml.layout.api import *
 from enaml.stdlib.fields import IntField
@@ -5,19 +7,28 @@ from enaml.core.api import Include
 from football_matchday_summarizer.controller import MatchDaySummaryController
 
 
+def loadIcon(filename):
+    with open(filename, 'rb') as f:
+        data = f.read()
+        image = enaml.image.Image(data=data)
+        return enaml.icon.Icon(images=[enaml.icon.IconImage(image=image)])
+
 enamldef Main(Window):
     title = 'Football Matchday Summarizer'
     attr controller = MatchDaySummaryController()
+    initial_size = (800, 600)
+    icon = loadIcon(os.path.dirname(os.path.abspath(__file__))+r'/football.png')
     Container:
         constraints << [vbox(
-                            container_inputs,
+                            grp_inputs,
                             spc,
-                            container_result
+                            grp_output
                         )]
-        Container: container_inputs:
-            constraints << [hbox(form_league_code, form_match_day)]
+        GroupBox: grp_inputs:
+            title = 'Select league code and match day'
+            constraints << [hbox(form_league_code, spacer, form_match_day)]
             Form: form_league_code:
-                constraints << [lbl_league.right == combo_league.left - 10]
+                constraints << [lbl_league.width == 100]
                 Label: lbl_league:
                     text = 'League Code'
                 ObjectCombo: combo_league:
@@ -26,6 +37,7 @@ enamldef Main(Window):
             Container: form_match_day:
                 constraints << [hbox(lbl_match_day, int_match_day, btn_prev_day, btn_next_day, spacer),
                                 lbl_match_day.top == int_match_day.top,
+                                lbl_match_day.width == 100,
                                 btn_next_day.width == 25,
                                 btn_prev_day.width == 25,
                                 align('v_center', lbl_match_day, int_match_day, btn_prev_day, btn_next_day)
@@ -47,8 +59,12 @@ enamldef Main(Window):
 
         Separator: spc:
             pass
-        Container: container_result:
-            constraints << [hbox(home_teams, scores, away_teams)]
+        GroupBox: grp_output:
+            title << 'League code: %s. Matchday: %s' % (controller.league_code, controller.match_day)
+            constraints << [
+                            hbox(home_teams, scores, away_teams),
+                            home_teams.width == scores.width == away_teams.width,
+                            ]
             Container: home_teams:
                 Label:
                     text = "Home Team"
