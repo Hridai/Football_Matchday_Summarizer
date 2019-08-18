@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='FootballMatchdaySummarizer',
@@ -7,7 +7,8 @@ setup(
     install_requires=['enaml',
                       'atom',
                       ],
+    packages=find_packages(),
     entry_points={'console_scripts': [
-        'run = main:main',
+        'run = football_match_day_summarizer.main:main',
     ]}
 )
