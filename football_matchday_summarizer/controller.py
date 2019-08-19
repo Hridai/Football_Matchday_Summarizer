@@ -1,11 +1,11 @@
 from atom.atom import Atom, observe
 from atom.api import Int, Str, List
 
-from model import fetch_scores
+from football_matchday_summarizer.model import fetch_scores
 
 class MatchDaySummaryController(Atom):
-    match_day = Int()
-    league_code = Str()
+    match_day = Int(1)
+    league_code = Str(default='PL')
     home_teams = List()
     away_teams = List()
     scores = List()
@@ -15,7 +15,8 @@ class MatchDaySummaryController(Atom):
         self.match_day += 1
 
     def decrement_match_day(self):
-        self.match_day -= 1
+        if self.match_day > 1:
+            self.match_day -= 1
 
     @observe('match_list')
     def write_match_result(self, *args):
