@@ -16,70 +16,117 @@ def loadIcon(filename):
 enamldef Main(Window):
     title = 'Football Matchday Summarizer'
     attr controller = MatchDaySummaryController()
-    initial_size = (800, 600)
+    initial_size = (800, 900)
     icon = loadIcon(os.path.dirname(os.path.abspath(__file__))+r'/football.png')
     Container:
-        constraints << [vbox(
-                            grp_inputs,
-                            spc,
-                            grp_output
-                        )]
-        padding = 30
-        GroupBox: grp_inputs:
-            title = 'Select league code and match day'
-            constraints << [hbox(form_league_code, spacer, form_match_day)]
-            Form: form_league_code:
-                constraints << [lbl_league.width == 100]
-                Label: lbl_league:
-                    text = 'League Code'
-                ObjectCombo: combo_league:
-                    items = ['PL', 'PD', 'BL1', 'SA', '']
-                    selected := controller.league_code
-            Container: form_match_day:
-                constraints << [hbox(lbl_match_day, int_match_day, btn_prev_day, btn_next_day, spacer),
-                                lbl_match_day.top == int_match_day.top,
-                                lbl_match_day.width == 100,
-                                btn_next_day.width == 25,
-                                btn_prev_day.width == 25,
-                                align('v_center', lbl_match_day, int_match_day, btn_prev_day, btn_next_day)
-                                ]
-                Label: lbl_match_day:
-                    text = 'Match Day'
-                IntField: int_match_day:
-                    read_only = True
-                    value := controller.match_day
-                    minimum = 0
-                PushButton: btn_next_day:
-                    text = '+'
-                    clicked::
-                        controller.increment_match_day()
-                PushButton: btn_prev_day:
-                    text = '-'
-                    clicked::
-                        controller.decrement_match_day()
-
-        Separator: spc:
-            pass
-        GroupBox: grp_output:
-            title << 'League code: %s. Matchday: %s' % (controller.league_code, controller.match_day)
-            constraints << [
-                            hbox(home_teams, scores, away_teams),
-                            home_teams.width == scores.width == away_teams.width,
-                            ]
-            Container: home_teams:
-                Label:
-                    text = "Home Team"
-                Include:
-                    objects << [Label(text=team) for team in controller.home_teams]
-            Container: scores:
-                Label:
-                    text = ""
-                Include:
-                    objects << [Label(text=score) for score in controller.scores]
-            Container: away_teams:
-                Label:
-                    text = "Away Team"
-                Include:
-                    objects << [Label(text=team) for team in controller.away_teams]
-
-
+        padding = 0
+        Splitter:
+            SplitItem:
+                Container:
+                    constraints << [vbox(
+                                        grp_inputs,
+                                        spc,
+                                        grp_output
+                                    )]
+                    padding = 30
+                    GroupBox: grp_inputs:
+                        title = 'Select league code and match day'
+                        constraints << [hbox(form_league_code, spacer, form_match_day)]
+                        Form: form_league_code:
+                            constraints << [lbl_league.width == 100]
+                            Label: lbl_league:
+                                text = 'League Code'
+                            ObjectCombo: combo_league:
+                                items = ['PL', 'PD', 'BL1', 'SA', '']
+                                selected := controller.league_code
+                        Container: form_match_day:
+                            constraints << [hbox(lbl_match_day, int_match_day, btn_prev_day, btn_next_day, spacer),
+                                            lbl_match_day.top == int_match_day.top,
+                                            lbl_match_day.width == 100,
+                                            btn_next_day.width == 25,
+                                            btn_prev_day.width == 25,
+                                            align('v_center', lbl_match_day, int_match_day, btn_prev_day, btn_next_day)
+                                            ]
+                            Label: lbl_match_day:
+                                text = 'Match Day'
+                            IntField: int_match_day:
+                                read_only = True
+                                value := controller.match_day
+                                minimum = 0
+                            PushButton: btn_next_day:
+                                text = '+'
+                                clicked::
+                                    controller.increment_match_day()
+                            PushButton: btn_prev_day:
+                                text = '-'
+                                clicked::
+                                    controller.decrement_match_day()
+            
+                    Separator: spc:
+                        pass
+                    GroupBox: grp_output:
+                        title << 'League code: %s. Matchday: %s' % (controller.league_code, controller.match_day)
+                        constraints << [
+                                        hbox(home_teams, scores, away_teams),
+                                        home_teams.width == scores.width == away_teams.width,
+                                        ]
+                        Container: home_teams:
+                            Label:
+                                text = "Home Team"
+                            Include:
+                                objects << [Label(text=team) for team in controller.home_teams]
+                        Container: scores:
+                            Label:
+                                text = ""
+                            Include:
+                                objects << [Label(text=score) for score in controller.scores]
+                        Container: away_teams:
+                            Label:
+                                text = "Away Team"
+                            Include:
+                                objects << [Label(text=team) for team in controller.away_teams]
+            SplitItem:
+                Container:
+                    constraints << [vbox(
+                                        grp_inputs2,
+                                        spc2,
+                                        grp_output2
+                                    )]
+                    padding = 30
+                    GroupBox: grp_inputs2:
+                        title = 'League Table: %s. Matchday %s' % (controller.league_code, controller.match_day)
+                        constraints << [hbox(form_match_day2)]
+                        Container: form_match_day2:
+                            constraints << [hbox(btn_prev_day2),
+                                            btn_prev_day2.width == 225,
+                                            align('v_center', btn_prev_day2)
+                                            ]
+                            PushButton: btn_prev_day2:
+                                text = 'Refresh Table'
+                                clicked::
+                                    controller.decrement_match_day()
+            
+                    Separator: spc2:
+                        pass
+                    GroupBox: grp_output2:
+                        title << 'League code: %s. Matchday: %s' % (controller.league_code, controller.match_day)
+                        constraints << [
+                                        hbox(team_names, games_played, goals_for, goals_against, points_total),
+                                        team_names.width == 325,
+                                        align('v_center', games_played, goals_for, goals_against, points_total)
+                                        ]
+                        Container: team_names:
+                            Label:
+                                text = "Team Name"
+                        Container: games_played:
+                            Label:
+                                text = "P"
+                        Container: goals_for:
+                            Label:
+                                text = "GF"
+                        Container: goals_against:
+                            Label:
+                                text = "GA"
+                        Container: points_total:
+                            Label:
+                                text = "Pts"
