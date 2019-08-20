@@ -21,10 +21,10 @@ The free license to this API only allows 10 calls a minute. Each of the below, p
 So clicking on "PL" costs 2 calls as it loads the matches and then the scorers underneath it. If standings are ticked, it will cost 3 calls.
 
 # ToDo
-- Add Standings when pressing a league button (Possibly with a checkbox? So as not to blast through the free limit of calls to API)
+- Add Standings backend to the rhs of the main window
 - Add more leagues (Ligue 1? Trivial addition)
-- Add scorers by default
-- Add times for games in matchweek not yet played
+- Add scorers. mins of goals
+- Add times for games in matchweek not yet played. Timezone adjustments?
 - Add a screenshot of the GUI in this readme
 - Format the Matchweek. Add a heading
 - Put all of the results in a scrollable list, as it will easily exceed the height of the screen if many scorers, standings incl
