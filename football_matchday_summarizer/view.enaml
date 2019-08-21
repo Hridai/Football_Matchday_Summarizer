@@ -88,45 +88,58 @@ enamldef Main(Window):
             SplitItem:
                 Container:
                     constraints << [vbox(
-                                        grp_inputs2,
-                                        spc2,
                                         grp_output2
                                     )]
                     padding = 30
-                    GroupBox: grp_inputs2:
-                        title = 'League Table: %s. Matchday %s' % (controller.league_code, controller.match_day)
-                        constraints << [hbox(form_match_day2)]
-                        Container: form_match_day2:
-                            constraints << [hbox(btn_prev_day2),
-                                            btn_prev_day2.width == 225,
-                                            align('v_center', btn_prev_day2)
-                                            ]
-                            PushButton: btn_prev_day2:
-                                text = 'Refresh Table'
-                                clicked::
-                                    controller.decrement_match_day()
-            
-                    Separator: spc2:
-                        pass
                     GroupBox: grp_output2:
                         title << 'League code: %s. Matchday: %s' % (controller.league_code, controller.match_day)
                         constraints << [
-                                        hbox(team_names, games_played, goals_for, goals_against, points_total),
+                                        hbox(team_names, games_played, games_won, games_lost, games_drawn, goals_for, goals_against, goal_diff, points_total),
                                         team_names.width == 325,
-                                        align('v_center', games_played, goals_for, goals_against, points_total)
+                                        align('v_center', games_played, games_won, games_lost, games_drawn, goals_for, goals_against, goal_diff, points_total)
                                         ]
                         Container: team_names:
                             Label:
                                 text = "Team Name"
+                            Include:
+                                objects << [Label(text=team) for team in controller.standings_team]
                         Container: games_played:
                             Label:
                                 text = "P"
+                            Include:
+                                objects << [Label(text=entry) for entry in controller.standings_p]
+                        Container: games_won:
+                            Label:
+                                text = "W"
+                            Include:
+                                objects << [Label(text=entry) for entry in controller.standings_w]
+                        Container: games_lost:
+                            Label:
+                                text = "L"
+                            Include:
+                                objects << [Label(text=entry) for entry in controller.standings_l]
+                        Container: games_drawn:
+                            Label:
+                                text = "D"
+                            Include:
+                                objects << [Label(text=entry) for entry in controller.standings_d]
                         Container: goals_for:
                             Label:
                                 text = "GF"
+                            Include:
+                                objects << [Label(text=entry) for entry in controller.standings_gf]
                         Container: goals_against:
                             Label:
                                 text = "GA"
+                            Include:
+                                objects << [Label(text=entry) for entry in controller.standings_ga]
+                        Container: goal_diff:
+                            Label:
+                                text = "GD"
+                            Include:
+                                objects << [Label(text=entry) for entry in controller.standings_gd]
                         Container: points_total:
                             Label:
                                 text = "Pts"
+                            Include:
+                                objects << [Label(text=entry) for entry in controller.standings_pts]
