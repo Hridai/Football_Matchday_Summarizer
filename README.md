@@ -2,7 +2,6 @@
 An application to allow you to check all the pertinent information from the top 4 European football leagues (Premier League, La Liga, Bundesliga and Serie A) rapidly.
 
 ## How, Why, API
-###Why, my motivaton
 Wanting to be able to check all the pertinent information across the top 4 european leagues rapidly. As things stand, to check the tables, the results and the goalscorers of each game (as well as see the times of the games in the matchweek yet to be played) can require dozens of mouseclicks. Here, simply by choosing the league and selecting your gameweek, you will find all this information on one clean screen.
 
 I was also motivated by my curiosity abut working with APIs and learning to create front-ends in py. I collaborated with user [PyJay](https://github.com/PyJay) to build a GUI in enaml/QTPy to create this handy tool.
