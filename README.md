@@ -14,7 +14,7 @@ The free license to this API only allows 10 calls a minute. Each of the below, p
 
 So clicking on "PL" costs 2 calls as it loads the matches and then the scorers underneath it. Including the standings being refreshed upon a new league being selected, it will cost in total 3 calls.
 
-![Front End](guiscreenshot.jpg)
+[![Front End](guiscreenshot.jpg)](guiscreenshot.jpg)
 
 ## Installation
 To install on an environment you can simply execute the following
